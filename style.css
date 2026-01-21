@@ -1,0 +1,166 @@
+    /* 1. Återställ marginaler */
+    body { margin: 0; }
+
+    /* 2. Layout: kolumn med fixerad header + flexibel main-yta */
+    body { display: flex; flex-direction: column; height: 100vh; }
+
+
+    
+    html, body {
+          background-color: black; /* helsvart bakgrund alltid */
+          color-scheme: dark;      /* säger till iOS att statusfältet ska vara ljust på mörk bakgrund */
+    }
+
+    header {
+        position: fixed;
+        bottom: 0;
+        left: 0;           /* bra att ha med när du anger width */
+        width: 90vw;       /* ← det här är det som saknades */
+        height: 5vh;       /* eller ett fast px-värde */
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        z-index: 1000;
+
+        /* centrera motivet */
+        background: url('kortknapp.png') center/contain no-repeat;
+    }
+
+    main {
+      flex: 1;                 /* fyll resterande höjd */
+      overflow: hidden;
+      position: relative;
+      
+
+      background-color: black; /* helsvart bakgrund alltid */
+      color-scheme: dark;
+      
+    }
+
+    /* 3. “Lilla skärmen” – ett iframe-fönster */
+    .embed-frame {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+
+
+/* --- Overlay (svart bakgrund) --- */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: black;           /* helsvart bakgrund */
+  display: none;               /* gömd initialt */
+  place-items: center;         /* centrerar innehållet */
+  z-index: 2000;
+}
+
+#overlay.show { display: grid; }
+
+/* --- Inre wrapper (kort + formulär) --- */
+.card-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 92vw;
+}
+
+/* --- Stängknapp --- */
+.close {
+  align-self: flex-end;
+  border: 0;
+  background: transparent;
+  font-size: 2rem;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* --- Kortet --- */
+.card {
+  background: black;
+  position: fixed;
+  display: inline-block;
+  max-width: 92vw;
+  max-height: 100vh;
+}
+
+.card img {
+  display: flex;
+  max-width: 100%;
+  max-height: 100vh;
+  height: auto;
+  width: auto;
+}
+
+/* --- Texten på kortet (samma vertikala position) --- */
+.card-text {
+  -webkit-font-smoothing: antialiased;   /* WebKit (Chrome/Safari) */
+  -moz-osx-font-smoothing: grayscale;    /* Firefox */
+  text-rendering: optimizeLegibility;    /* bättre kerning/antialiasing */
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  top: 22%;                  /* justera vertikal startposition */
+  left: 38%;                 /* justera horisontell position */
+  
+  display: flex;
+  flex-direction: column;
+  gap: 0px;                 /* avstånd mellan namn och personnummer */
+
+  writing-mode: vertical-rl; /* gör texten vertikal (uppifrån → nedåt) */
+  text-orientation: mixed;   /* bokstäverna skrivs rätt väg */
+
+  color: #000000;
+  font-weight: 100;
+  font-size: 1rem;         /* ungefär samma storlek som första kortet */
+  text-shadow: 0 0 1px rgba(0,0,0,.6); /* gör texten tydlig */
+}
+
+.card-text span {
+  /* varje rad (namn / pnr) */
+  display: inline-block;
+}
+
+/* --- Formulär under kortet --- */
+
+
+/* Liten knapp i hörnet */
+#openForm {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 2100;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Formulär-overlay */
+#formOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  place-items: center;
+  z-index: 2000;
+}
+
+#formOverlay.show {
+  display: grid;
+}
+
+#formOverlay .controls {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  display: grid;
+  gap: 10px;
+  color: #fff;
+  width: 300px;
+}

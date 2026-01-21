@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <!-- ...existing code... -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Inbäddad sida">
+  <link rel="apple-touch-icon" href="icon.png">
+<!-- ...existing code... -->
+  <title>Inbäddad sida</title>
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+  <main>
+        <button id="openForm" onclick="visaForm()">⚙️</button>
+
+
+    <!-- Iframe eller annan innehåll -->
+    <iframe
+      class="embed-frame"
+      src="https://mecenat.com/se"
+      title="Inbäddad sida">
+    </iframe>
+
+    <!-- Knappen som öppnar kortet -->
+    <header onclick="ta()"></header>
+
+    <div id="formOverlay" onclick="stängForm()">
+      <form class="controls" onsubmit="return sparaData(event)" onclick="event.stopPropagation()">
+        <label>
+          Namn
+          <input id="nameIn" type="text" placeholder="För- och efternamn" required>
+        </label>
+        <label>
+          Personnummer
+          <input id="pnrIn" type="text" placeholder="ÅÅÅÅMMDD-XXXX" required>
+        </label>
+        <button type="submit">Spara</button>
+      </form>
+    </div>
+
+    <!-- Overlay med kortet -->
+    <div id="overlay">
+      <div class="card" onclick="bort()">
+        <img src="fullsize.jpg" alt="Större bild av kortet">
+        <div id="cardText" class="card-text">
+          <span id="nameOut"></span>
+          <span id="pnrOut"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</body>
+</html>
